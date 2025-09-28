@@ -1,0 +1,146 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg,#3a86ff,#89f7fe); /* pleasant blue gradient */
+  color: #081325;
+  min-height: 200vh; /* enough scroll to grow block */
+}
+
+.love-container {
+  display: block;
+  /* container kept for semantics; block uses fixed positioning */
+}
+
+.love-block {
+  position: fixed;
+  left: 50%;
+  top: 50%; /* start centered vertically */
+  transform: translateX(-50%) translateY(0) scale(1);
+  transform-origin: center;
+  z-index: 950;
+  background: rgba(255,255,255,0.12);
+  color: #fff6fb;
+  font-weight: 800;
+  padding: clamp(0.6rem, 2.5vw, 1.2rem) clamp(0.9rem, 4vw, 1.6rem);
+  border-radius: 14px;
+  font-size: clamp(1rem, 4.5vw, 2.2rem);
+  text-align: center;
+  transition: transform 0.12s linear;
+  width: min(92%, 560px);
+  box-shadow: 0 8px 30px rgba(2,18,40,0.18);
+}
+
+.blocks {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  background: transparent; /* keep background from covering page */
+}
+
+/* Ensure nav stacks above page but below love block if needed */
+.blocks { z-index: 900; }
+
+.block {
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+  padding: 0.6rem 1.1rem;
+  border-radius: 10px;
+  transition: transform 0.15s ease, box-shadow 0.15s;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  display: inline-block;
+  min-width: 160px;
+  text-align: center;
+}
+
+.block:active { transform: translateY(1px); }
+
+.block.masha { background: linear-gradient(135deg,#ff758c,#ff7eb3); }
+.block.mbali { background: linear-gradient(135deg,#65d6f7,#4cc9f0); }
+.block.petrecia { background: linear-gradient(135deg,#ffd166,#ffaf7b); color: #4b2e83; }
+.block.sunday { background: linear-gradient(135deg,#bde0fe,#9bf6ff); color: #023e8a; }
+
+.block:hover { transform: translateY(-3px); box-shadow: 0 8px 18px rgba(0,0,0,0.14); }
+
+/* Poem page layout tweaks */
+.poem {
+  max-width: 900px;
+  margin: 1.5rem auto; /* reduced top gap */
+  padding: 2rem;
+  background: rgba(255,255,255,0.08);
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+}
+.poem h1 { margin-top: 0; color: #fff3f8; }
+
+/* Letter formatting */
+.letter {
+  font-family: Georgia, 'Times New Roman', serif;
+  color: lab(53.15% 79.61 53.09);
+  background: rgba(255,255,255,0.92);
+  padding: 1.25rem 1.5rem;
+  border-radius: 8px;
+  line-height: 1.6;
+  
+}
+.letter p { margin: 0 0 1rem 0; }
+.letter p:first-child { font-weight: 700; }
+.letter p:last-child { margin-top: 1.2rem; font-style: italic; }
+
+/* Home button for poem pages */
+.home-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1rem;
+  background: rgba(255,255,255,0.14);
+  color: #001233;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+/* Falling hearts animation (used on poem pages) */
+.falling-heart {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  width: 28px;
+  height: 28px;
+  background-color: #ff6b81;
+  transform: rotate(-45deg);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  will-change: transform, opacity;
+  animation: fall linear forwards;
+}
+
+/* small circle bumps to make heart shape */
+.falling-heart::before,
+.falling-heart::after {
+  content: "";
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  background-color: inherit;
+  border-radius: 50%;
+}
+.falling-heart::before { left: -14px; top: -6px; }
+.falling-heart::after { left: 14px; top: -6px; }
+
+@keyframes fall {
+  0% { transform: translateY(-10vh) scale(0.9) rotate(-25deg); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(110vh) scale(1.05) rotate(20deg); opacity: 0.8; }
+}
+
+/* variants */
+.falling-heart.small { width: 18px; height: 18px; }
+.falling-heart.small::before, .falling-heart.small::after { width: 18px; height: 18px; left: -9px; }
+.falling-heart.pink { background-color: #ff7aa2; }
+.falling-heart.red { background-color: #e63946; }
+.falling-heart.purple { background-color: #b892ff; }
+.falling-heart.yellow { background-color: #ffd166; }
